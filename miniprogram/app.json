@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/tools/index",
+    "pages/index/index",
+    "pages/home/index",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/openapi/openapi",
+    "pages/openapi/serverapi/serverapi",
+    "pages/openapi/callback/callback",
+    "pages/openapi/cloudid/cloudid"
+  ],
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#F16846",
+    "list": [
+      {
+        "pagePath": "pages/tools/index",
+        "text": "工具",
+        "iconPath": "./images/tools.png",
+        "selectedIconPath": "./images/tools.selected.png"
+      },
+      {
+        "pagePath": "pages/home/index",
+        "text": "我的",
+        "iconPath": "./images/home.png",
+        "selectedIconPath": "./images/home.selected.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "生活帮帮帮",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

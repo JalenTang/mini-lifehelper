@@ -1,0 +1,15 @@
+/**index.wxss**/
+
+.container {
+  width: 100vw;
+  height: 100Vh;
+  background: #f6f6f6;
+}
+
+.tools-main {
+  width: 100%;
+}
+
+.tools-main > view {
+  width: 100%;
+}
