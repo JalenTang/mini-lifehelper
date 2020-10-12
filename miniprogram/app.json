@@ -1,8 +1,10 @@
 {
   "pages": [
+    "pages/mortgage/index",
     "pages/tools/index",
-    "pages/index/index",
     "pages/home/index",
+
+    "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",

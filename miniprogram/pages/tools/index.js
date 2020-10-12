@@ -5,15 +5,38 @@ Page({
    * 页面的初始数据
    */
   data: {
+    swiperList: [
+      {
+        id: 0,
+        type: 'image',
+        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
+      },
+      {
+        id: 1,
+        type: 'image',
+        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
+      },
+      {
+        id: 2,
+        type: 'image',
+        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
+      },
+      {
+        id: 3,
+        type: 'image',
+        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
+      }
+    ],
     iconList: [
       { icon: 'eat', color: 'orange', name: '中午吃什么' },
-      { icon: 'eat', color: 'mauve', name: '帮助' },
-      { icon: 'questionfill', color: 'mauve', name: '帮助' },
-      { icon: 'questionfill', color: 'mauve', name: '帮助' },
-      { icon: 'questionfill', color: 'mauve', name: '帮助' },
-      { icon: 'questionfill', color: 'mauve', name: '帮助' },
-      { icon: 'questionfill', color: 'mauve', name: '帮助' },
-      { icon: 'questionfill', color: 'mauve', name: '帮助' }
+      { icon: 'mortgage', color: 'orange', name: '房贷算算算' },
+      { icon: 'questionfill', color: 'orange', name: '待定' },
+      { icon: 'questionfill', color: 'orange', name: '待定' },
+      { icon: 'questionfill', color: 'orange', name: '待定' },
+      { icon: 'questionfill', color: 'orange', name: '待定' },
+      { icon: 'questionfill', color: 'orange', name: '待定' },
+      { icon: 'questionfill', color: 'orange', name: '待定' },
+      { icon: 'questionfill', color: 'orange', name: '待定' }
     ],
     gridCol: 3,
   },
@@ -22,9 +45,16 @@ Page({
     console.log(e);
   },
 
-  onToolsItemClick: function(e) {
+  onToolsItemClick: function (e) {
     const { item } = e.currentTarget.dataset
     console.log(item);
+    wx.navigateTo({
+      url: '/pages/mortgage/index',
+      success: function() {},
+      fail: function() {
+        console.log('fail');
+      }
+    })
   },
 
   /**

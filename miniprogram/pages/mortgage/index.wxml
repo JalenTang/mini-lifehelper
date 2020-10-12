@@ -1,0 +1,161 @@
+<!-- miniprogram/pages/mortgage/index.wxml -->
+<view class="container">
+  <!-- <van-tabs active="{{ activeTab }}" bind:change="onTabChange">
+    <van-tab title="公积金贷款">
+      <form class="form margin-top">
+        <view class="cu-form-group" wx:if="{{activeTab !== 1}}">
+          <view class="title">贷款总额（万元）</view>
+          <input type="digit" placeholder="请输入贷款金额"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">按揭年数</view>
+          <picker mode="selector" range="{{loanYearsRange}}" value="{{curLoanYears}}" bindchange="onLoanRangeChange">
+            <view class="picker">{{loanYearsRange[curLoanYearsIndex]}}</view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">贷款利率</view>
+          <picker mode="selector" range="{{loanYearsRange}}" value="{{curLoanYears}}" bindchange="onLoanRangeChange">
+            <view class="picker">{{loanYearsRange[curLoanYearsIndex]}}</view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">还款方式</view>
+          <picker mode="selector" range="{{repaymentMethods}}" range-key="{{'name'}}" value="{{repaymentMethodIndex}}" bindchange="onRepaymentMethodChange">
+            <view class="picker">{{repaymentMethods[repaymentMethodIndex]}}</view>
+          </picker>
+        </view>
+      </form>
+    </van-tab>
+    <van-tab title="商业贷款"></van-tab>
+    <van-tab title="组合贷款"></van-tab>
+  </van-tabs> -->
+  <view class="bg-white nav">
+    <view class="flex text-center">
+      <view class="cu-item flex-sub {{item.type===activeTabType?'cur text-orange':''}}" wx:for="{{tabs}}" wx:key="index" bindtap="onTabChange" data-type="{{item.type}}">
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 公积金贷款 -->
+  <form class="form margin-top" wx:if="{{activeTabType === 1}}">
+    <view class="cu-form-group">
+      <view class="title">贷款总额（万元）</view>
+      <input type="number" placeholder="请输入贷款金额" bindinput="onFundLoanMoneyChange"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">按揭年数</view>
+      <picker mode="selector" range="{{loanYearsRange}}" value="{{fundLoanYearIndex}}" bindchange="onFundLoanYearsChange">
+        <view class="picker">{{loanYearsRange[fundLoanYearIndex]}}</view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">贷款利率</view>
+      <picker mode="selector" range="{{fundLoanRatesRange}}" range-key="{{'name'}}" value="{{fundLoanRatesIndex}}" bindchange="onFundLoanRatesChange">
+        <view class="picker">{{fundLoanRatesRange[fundLoanRatesIndex].name}}</view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">还款方式</view>
+      <picker mode="selector" range="{{repaymentMethodsRange}}" range-key="{{'name'}}" value="{{fundLoanRepaymentMethodIndex}}" bindchange="onFundLoanRepaymentMethodChange">
+        <view class="picker">{{repaymentMethodsRange[fundLoanRepaymentMethodIndex].name}}</view>
+      </picker>
+    </view>
+
+    <view class="padding margin-top">
+      <button class="cu-btn block bg-orange lg" bindtap="onFundLoanCal">开始计算</button>
+    </view>
+  </form>
+
+  <!-- 商业贷款 -->
+  <form class="form margin-top" wx:if="{{activeTabType === 2}}">
+    <view class="cu-form-group">
+      <view class="title">贷款总额（万元）</view>
+      <input type="number" placeholder="请输入贷款金额" bindinput="onCommercialLoanMoneyChange"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">按揭年数</view>
+      <picker mode="selector" range="{{loanYearsRange}}" value="{{commercialLoanYearIndex}}" bindchange="onCommercialLoanYearsChange">
+        <view class="picker">{{loanYearsRange[commercialLoanYearIndex]}}</view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">贷款利率</view>
+      <picker mode="selector" range="{{commercialLoanRatesRange}}" range-key="{{'name'}}" value="{{commercialLoanRatesIndex}}" bindchange="onCommercialLoanRatesChange">
+        <view class="picker">{{commercialLoanRatesRange[commercialLoanRatesIndex].name}}</view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">还款方式</view>
+      <picker mode="selector" range="{{repaymentMethodsRange}}" range-key="{{'name'}}" value="{{commercialLoanRepaymentMethodIndex}}" bindchange="onCommercialLoanRepaymentMethodChange">
+        <view class="picker">{{repaymentMethodsRange[commercialLoanRepaymentMethodIndex].name}}</view>
+      </picker>
+    </view>
+
+    <view class="padding margin-top">
+      <button class="cu-btn block bg-orange lg" bindtap="onCommercialLoanCal">开始计算</button>
+    </view>
+  </form>
+
+  <!-- 组合贷款 -->
+  <form class="form margin-top" wx:if="{{activeTabType === 3}}">
+    <view class="cu-form-group">
+      <view class="title">贷款总额（万元）</view>
+      <input type="number" placeholder="请输入贷款金额" bindinput="onLoanTotalChange"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">按揭年数</view>
+      <picker mode="selector" range="{{loanYearsRange}}" value="{{curLoanYears}}" bindchange="onLoanRangeChange">
+        <view class="picker">{{loanYearsRange[curLoanYearsIndex]}}</view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">贷款利率</view>
+      <picker mode="selector" range="{{loanYearsRange}}" value="{{curLoanYears}}" bindchange="onLoanRangeChange">
+        <view class="picker">{{loanYearsRange[curLoanYearsIndex]}}</view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">还款方式</view>
+      <picker mode="selector" range="{{repaymentMethods}}" range-key="{{'name'}}" value="{{repaymentMethodIndex}}" bindchange="onRepaymentMethodChange">
+        <view class="picker">{{repaymentMethods[repaymentMethodIndex]}}</view>
+      </picker>
+    </view>
+  </form>
+  <!-- <form class="margin-top">
+    <view class="cu-form-group" wx:if="{{activeTab !== 1}}">
+      <view class="title">商业贷款（万）</view>
+      <input type="digit" placeholder="商业贷款金额"></input>
+    </view>
+    <view class="cu-form-group" wx:if="{{activeTab !== 0}}">
+      <view class="title">公积金贷款（万）</view>
+      <input type="digit" placeholder="请输入贷款金额"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">按揭年数</view>
+      <picker mode="selector" range="{{loanYearsRange}}" value="{{curLoanYears}}" bindchange="onLoanRangeChange">
+        <view class="picker">{{loanYearsRange[curLoanYearsIndex]}}</view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">商贷利率（%）</view>
+      <picker mode="selector" range="{{loanYearsRange}}" value="{{curLoanYears}}" bindchange="onLoanRangeChange">
+        <view class="picker">{{loanYearsRange[curLoanYearsIndex]}}</view>
+      </picker>
+      <picker mode="selector" range="{{loanYearsRange}}" value="{{curLoanYears}}" bindchange="onLoanRangeChange">
+        <view class="picker">{{loanYearsRange[curLoanYearsIndex]}}</view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">公积金利率（%）</view>
+      <picker mode="selector" range="{{loanYearsRange}}" value="{{curLoanYears}}" bindchange="onLoanRangeChange">
+        <view class="picker">{{loanYearsRange[curLoanYearsIndex]}}</view>
+      </picker>
+      <picker mode="selector" range="{{loanYearsRange}}" value="{{curLoanYears}}" bindchange="onLoanRangeChange">
+        <view class="picker">{{loanYearsRange[curLoanYearsIndex]}}</view>
+      </picker>
+    </view>
+  </form> -->
+  
+</view>

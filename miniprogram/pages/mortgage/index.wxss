@@ -1,0 +1,32 @@
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  background: #f6f6f6;
+}
+
+.container > view {
+  width: 100%;
+}
+
+.form {
+  width: 100%;
+  height: 100%;
+}
+
+.cu-form-group input {
+  text-align: right;
+}
+
+.container van-tabs {
+  width: 100%;
+  height: 100%;
+}
+
+.cu-form-group .title {
+  min-width: calc(4em + 30rpx);
+}
+
+button.block {
+  width: 100%;
+  margin: 0;
+}

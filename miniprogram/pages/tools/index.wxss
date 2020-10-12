@@ -1,9 +1,12 @@
 /**index.wxss**/
-
 .container {
   width: 100vw;
   height: 100Vh;
   background: #f6f6f6;
+}
+
+swiper {
+  width: 100%;
 }
 
 .tools-main {
