@@ -33,7 +33,7 @@ Page({
 
     // 公积金贷款
     fundLoanMoney: 0,
-    fundLoanYearIndex: 0,
+    fundLoanYearIndex: 11,
     fundLoanRatesRange: [
       { type: 1, name: '基准利率(3.25%)', rates: 0.0325 },
       { type: 2, name: '二套房上浮(3.575%)', rates: 0.03575 },
@@ -104,7 +104,7 @@ Page({
       events: {},
       success: function (res) {
         // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('transLoanParams', { ...data });
+        res.eventChannel.emit('transLoanDetailParams', { ...data });
       },
       fail: function () {},
     });
@@ -149,7 +149,7 @@ Page({
       events: {},
       success: function (res) {
         // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('transLoanParams', { ...data });
+        res.eventChannel.emit('transLoanDetailParams', { ...data });
       },
       fail: function () {},
     });

@@ -35,7 +35,20 @@ Page({
     wx.navigateBack();
   },
 
-  onRepaymentDetail: function () {},
+  onRepaymentDetail: function () {
+    const { money, rates, months } = this.data.loanParams
+    const type = this.data.activeType
+
+    wx.navigateTo({
+      url: '/pages/mortgage/list/index',
+      events: {},
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('transLoanListParams', { money, rates, months, type });
+      },
+      fail: function () {},
+    });
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -43,8 +56,8 @@ Page({
   onLoad: function (options) {
     const eventChannel = this.getOpenerEventChannel();
     const that = this;
-    // 监听transLoanParams事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('transLoanParams', function (data) {
+    // 监听transLoanDetailParams事件，获取上一页面通过eventChannel传送到当前页面的数据
+    eventChannel.on('transLoanDetailParams', function (data) {
       console.log(data);
       const { money, rates, months, type } = data;
       that.setData({
