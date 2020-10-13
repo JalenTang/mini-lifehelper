@@ -33,7 +33,7 @@ Page({
 
     // 公积金贷款
     fundLoanMoney: 0,
-    fundLoanYearIndex: 11,
+    fundLoanYearIndex: 0,
     fundLoanRatesRange: [
       { type: 1, name: '基准利率(3.25%)', rates: 0.0325 },
       { type: 2, name: '二套房上浮(3.575%)', rates: 0.03575 },
@@ -56,6 +56,14 @@ Page({
     ],
     commercialLoanRatesIndex: 3,
     commercialLoanRepaymentMethodIndex: 0,
+
+    // 组合贷款
+    combinedLoanFundMoney: 0,
+    combinedLoanFundRatesIndex: 0,
+    combinedLoanCommercialMoney: 0,
+    combinedLoanCommercialRatesIndex: 6,
+    combinedLoanYearIndex: 11,
+    combinedLoanRepaymentMethodsIndex: 0,
   },
 
   onTabChange(event) {
@@ -104,7 +112,7 @@ Page({
       events: {},
       success: function (res) {
         // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('transLoanDetailParams', { ...data });
+        res.eventChannel.emit('transLoanDetailParams', { data });
       },
       fail: function () {},
     });
@@ -149,7 +157,60 @@ Page({
       events: {},
       success: function (res) {
         // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('transLoanDetailParams', { ...data });
+        res.eventChannel.emit('transLoanDetailParams', { data });
+      },
+      fail: function () {},
+    });
+  },
+
+  // 组合贷款相关
+  onCombinedFundLoanMoneyChange(event) {
+    this.setData({
+      combinedLoanFundMoney: +event.detail.value,
+    });
+  },
+  onCombinedCommercialLoanMoneyChange(event) {
+    this.setData({
+      combinedLoanCommercialMoney: +event.detail.value,
+    });
+  },
+  onCombinedFundLoanRatesChange(event) {
+    this.setData({
+      combinedLoanFundRatesIndex: event.detail.value,
+    });
+  },
+  onCombinedCommercialLoanRatesChange(event) {
+    this.setData({
+      combinedLoanCommercialRatesIndex: event.detail.value,
+    });
+  },
+  onCombinedLoanYearsChange(event) {
+    this.setData({
+      combinedLoanYearIndex: event.detail.value,
+    });
+  },
+  onCombinedLoanRepaymentMethodChange(event) {
+    this.setData({
+      combinedLoanRepaymentMethodsIndex: event.detail.value,
+    });
+  },
+  onCombinedLoanCal() {
+    const data = {
+      fundMoney: this.data.combinedLoanFundMoney * 10000,
+      fundRates: this.data.fundLoanRatesRange[this.data.combinedLoanFundRatesIndex].rates / 12,
+      commercialMoney: this.data.combinedLoanCommercialMoney * 10000,
+      commercialRates: this.data.commercialLoanRatesRange[this.data.combinedLoanFundRatesIndex].rates / 12,
+      months: parseInt(this.data.loanYearsRange[this.data.commercialLoanYearIndex]) * 12,
+      type: this.data.repaymentMethodsRange[this.data.commercialLoanRepaymentMethodIndex].type,
+    };
+
+    console.log(data);
+    wx.navigateTo({
+      url: '/pages/mortgage/detail/index',
+      events: {},
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('transLoanDetailParams', { data, isCombined: true });
       },
       fail: function () {},
     });

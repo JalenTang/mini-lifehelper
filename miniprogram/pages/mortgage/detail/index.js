@@ -36,8 +36,8 @@ Page({
   },
 
   onRepaymentDetail: function () {
-    const { money, rates, months } = this.data.loanParams
-    const type = this.data.activeType
+    const { money, rates, months } = this.data.loanParams;
+    const type = this.data.activeType;
 
     wx.navigateTo({
       url: '/pages/mortgage/list/index',
@@ -57,16 +57,21 @@ Page({
     const eventChannel = this.getOpenerEventChannel();
     const that = this;
     // 监听transLoanDetailParams事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('transLoanDetailParams', function (data) {
-      console.log(data);
-      const { money, rates, months, type } = data;
-      that.setData({
-        activeType: type,
-        'loanParams.money': money,
-        'loanParams.rates': rates,
-        'loanParams.months': months,
-      });
-      that.calcLoan({ money, rates, months, type });
+    eventChannel.on('transLoanDetailParams', function ({ data, isCombined = false }) {
+      console.log({ data, isCombined });
+      if (isCombined) {
+        const { fundMoney, fundRates, commercialMoney, commercialRates, months, type } = data;
+
+      } else {
+        const { money, rates, months, type } = data;
+        that.setData({
+          activeType: type,
+          'loanParams.money': money,
+          'loanParams.rates': rates,
+          'loanParams.months': months,
+        });
+        that.calcLoan({ money, rates, months, type });
+      }
     });
   },
 

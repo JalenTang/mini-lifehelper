@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/mortgage/index",
+    "pages/mortgage/main/index",
+    "pages/mortgage/detail/index",
+    "pages/mortgage/list/index",
     "pages/tools/index",
     "pages/home/index",
-
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",

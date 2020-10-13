@@ -69,9 +69,9 @@ Page({
       // 每月应还本金=贷款本金×月利率×(1+月利率)^(还款月序号-1)÷〔(1+月利率)^还款月数-1〕
       list = Array(months).fill(0).map((item, index) => {
         return {
-          monthlyRepayment: (money * rates * (1 + rates) ** months) / ((1 + rates) ** months - 1),
-          monthlyInterest: (money * rates * ((1 + rates) ** months - (1 + rates) ** index)) / ((1 + rates) ** months - 1),
-          monthlyPrincipal: (money * rates * (1 + rates) ** index) / ((1 + rates) ** months - 1),
+          monthlyRepayment: ((money * rates * (1 + rates) ** months) / ((1 + rates) ** months - 1)).toFixed(2),
+          monthlyInterest: ((money * rates * ((1 + rates) ** months - (1 + rates) ** index)) / ((1 + rates) ** months - 1)).toFixed(2),
+          monthlyPrincipal: ((money * rates * (1 + rates) ** index) / ((1 + rates) ** months - 1)).toFixed(2),
         };
       });
     }
@@ -83,14 +83,14 @@ Page({
       // 每月应还本金=贷款本金÷还款月数
       list = Array(months).fill(0).map((item, index) => {
         return {
-          monthlyRepayment: money / months + (money - (money / months) * (index + 1)) * rates,
-          monthlyInterest: (money - (money / months) * (index + 1)) * rates,
-          monthlyPrincipal: money / months,
+          monthlyRepayment: (money / months + (money - (money / months) * index) * rates).toFixed(2),
+          monthlyInterest: ((money - (money / months) * index) * rates).toFixed(2),
+          monthlyPrincipal: (money / months).toFixed(2),
         };
       });
     }
 
-    console.log(list);
+    // console.log(list);
     this.setData({ list });
   },
 });
