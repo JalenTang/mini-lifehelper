@@ -91,11 +91,22 @@ Page({
     });
   },
   onFundLoanCal() {
-    console.table({
-      金额: this.data.fundLoanMoney,
-      年数: this.data.loanYearsRange[this.data.fundLoanYearIndex],
-      利率: this.data.fundLoanRatesRange[this.data.fundLoanRatesIndex],
-      方式: this.data.repaymentMethodsRange[this.data.fundLoanRepaymentMethodIndex],
+    const data = {
+      money: this.data.fundLoanMoney * 10000,
+      rates: this.data.fundLoanRatesRange[this.data.fundLoanRatesIndex].rates / 12,
+      months: parseInt(this.data.loanYearsRange[this.data.fundLoanYearIndex]) * 12,
+      type: this.data.repaymentMethodsRange[this.data.fundLoanRepaymentMethodIndex].type,
+    };
+
+    console.log(data);
+    wx.navigateTo({
+      url: '/pages/mortgage/detail/index',
+      events: {},
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('transLoanParams', { ...data });
+      },
+      fail: function () {},
     });
   },
 
@@ -125,14 +136,23 @@ Page({
     });
   },
   onCommercialLoanCal() {
-    const result = this.calLoan({
+    const data = {
       money: this.data.commercialLoanMoney * 10000,
       rates: this.data.commercialLoanRatesRange[this.data.commercialLoanRatesIndex].rates / 12,
       months: parseInt(this.data.loanYearsRange[this.data.commercialLoanYearIndex]) * 12,
       type: this.data.repaymentMethodsRange[this.data.commercialLoanRepaymentMethodIndex].type,
-    });
+    };
 
-    console.log(result.monthlyRepayment);
+    console.log(data);
+    wx.navigateTo({
+      url: '/pages/mortgage/detail/index',
+      events: {},
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('transLoanParams', { ...data });
+      },
+      fail: function () {},
+    });
   },
 
   /**
@@ -174,29 +194,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {},
-
-  /**
-   * @description 房贷计算函数
-   * @author Jalen Tang<jalen2017@hotmail.com>
-   * @date 2020-10-12
-   * @param {number} money 贷款金额
-   * @param {number} rates 月利率
-   * @param {number} months 月期数
-   * @param {number} type 还款方式
-   */
-  calLoan({ money, rates, months, type }) {
-    console.log({ money, rates, months, type });
-    const result = {};
-    // 等额本金
-    // 每月还款额=贷款本金×[月利率×（1+月利率）^还款月数]÷[（1+月利率）^还款月数-1]
-    if (type === 1) {
-      result.monthlyRepayment = (money * rates * ((1 + rates) ** months)) / ((1 + rates) ** months - 1);
-    }
-
-    // 等额本息
-    if (type === 2) {
-    }
-
-    return result;
-  },
 });

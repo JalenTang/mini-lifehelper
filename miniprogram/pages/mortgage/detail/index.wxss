@@ -1,0 +1,75 @@
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 0 8rpx;
+}
+
+.nav {
+  width: 100%;
+}
+
+.nav-item {
+  width: 50%;
+	font-weight: lighter;
+}
+
+.nav-item.active {
+	font-weight: normal;
+  background-color: #fff;
+}
+
+.content {
+  width: calc(100% - 20rpx);
+  height: 800rpx;
+  background-color: #fff;
+}
+
+.repayment {
+  height: 270rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.repayment-count {
+  font-family: 宋体;
+}
+
+.repayment-list {
+  display: flex;
+  margin-bottom: 80rpx;
+}
+
+.repayment-list-item {
+  width: 33.3%;
+  height: 120rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.repayment-list-item-title {
+  height: 40rpx;
+  font-weight: lighter;
+  margin-bottom: 20rpx;
+  line-height: 40rpx;
+  font-size: 24rpx;
+}
+
+.btn-area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-area button {
+  /* width: 49%; */
+  width: 320rpx!important;
+  margin: 0;
+}
+
+.tips {
+  font-weight: lighter;
+  font-size: 26rpx;
+}

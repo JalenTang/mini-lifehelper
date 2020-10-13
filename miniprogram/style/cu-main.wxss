@@ -3819,6 +3819,10 @@ scroll-view.cu-steps .cu-item {
 	overflow: hidden;
 }
 
+.text-lighter {
+	font-weight: lighter;
+}
+
 .text-bold {
 	font-weight: bold;
 }
