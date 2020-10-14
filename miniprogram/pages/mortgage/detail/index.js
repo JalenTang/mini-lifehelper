@@ -23,9 +23,32 @@ Page({
   },
 
   onTabChange: function (event) {
+    const { type } = event.currentTarget.dataset;
     // console.log(event);
-    const { money, rates, months } = this.data.loanParams;
-    this.calcLoan({ money, rates, months, type: event.currentTarget.dataset.type });
+    const { isCombined } = this.data.loanParams;
+
+    if (isCombined) {
+      const { fundMoney, fundRates, commercialMoney, commercialRates, months } = this.data.loanParams;
+      const fundResult = this.calcLoan({ money: fundMoney, rates: fundRates, months, type });
+      const commercialResult = this.calcLoan({ money: commercialMoney, rates: commercialRates, months, type });
+
+      this.setData({
+        'detail.monthlyRepayment': (fundResult.monthlyRepayment + commercialResult.monthlyRepayment).toFixed(2),
+        'detail.totalRepayment': ((fundResult.totalRepayment + commercialResult.totalRepayment) / 10000).toFixed(2),
+        'detail.totalLoan': (fundResult.totalLoan + commercialResult.totalLoan).toFixed(2),
+        'detail.totalInterest': ((fundResult.totalInterest + commercialResult.totalInterest) / 10000).toFixed(2),
+      });
+    } else {
+      const { money, rates, months } = this.data.loanParams;
+      const result = this.calcLoan({ money, rates, months, type });
+      this.setData({
+        'detail.monthlyRepayment': result.monthlyRepayment.toFixed(2),
+        'detail.totalRepayment': (result.totalRepayment / 10000).toFixed(2),
+        'detail.totalLoan': result.totalLoan.toFixed(2),
+        'detail.totalInterest': (result.totalInterest / 10000).toFixed(2),
+      });
+    }
+
     this.setData({
       activeType: event.currentTarget.dataset.type,
     });
@@ -36,15 +59,15 @@ Page({
   },
 
   onRepaymentDetail: function () {
-    const { money, rates, months } = this.data.loanParams;
     const type = this.data.activeType;
+    const that = this
 
     wx.navigateTo({
       url: '/pages/mortgage/list/index',
       events: {},
       success: function (res) {
         // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('transLoanListParams', { money, rates, months, type });
+        res.eventChannel.emit('transLoanListParams', { ...that.data.loanParams, type });
       },
       fail: function () {},
     });
@@ -61,16 +84,34 @@ Page({
       console.log({ data, isCombined });
       if (isCombined) {
         const { fundMoney, fundRates, commercialMoney, commercialRates, months, type } = data;
+        console.log({ fundMoney, fundRates, commercialMoney, commercialRates, months, type });
+        that.setData({
+          activeType: type,
+          loanParams: { isCombined, fundMoney, fundRates, commercialMoney, commercialRates, months },
+        });
 
+        const fundResult = that.calcLoan({ money: fundMoney, rates: fundRates, months, type });
+        const commercialResult = that.calcLoan({ money: commercialMoney, rates: commercialRates, months, type });
+
+        that.setData({
+          'detail.monthlyRepayment': (fundResult.monthlyRepayment + commercialResult.monthlyRepayment).toFixed(2),
+          'detail.totalRepayment': ((fundResult.totalRepayment + commercialResult.totalRepayment) / 10000).toFixed(2),
+          'detail.totalLoan': (fundResult.totalLoan + commercialResult.totalLoan).toFixed(2),
+          'detail.totalInterest': ((fundResult.totalInterest + commercialResult.totalInterest) / 10000).toFixed(2),
+        });
       } else {
         const { money, rates, months, type } = data;
         that.setData({
           activeType: type,
-          'loanParams.money': money,
-          'loanParams.rates': rates,
-          'loanParams.months': months,
+          loanParams: { isCombined, money, rates, months },
         });
-        that.calcLoan({ money, rates, months, type });
+        const result = that.calcLoan({ money, rates, months, type });
+        that.setData({
+          'detail.monthlyRepayment': result.monthlyRepayment.toFixed(2),
+          'detail.totalRepayment': (result.totalRepayment / 10000).toFixed(2),
+          'detail.totalLoan': result.totalLoan.toFixed(2),
+          'detail.totalInterest': (result.totalInterest / 10000).toFixed(2),
+        });
       }
     });
   },
@@ -118,6 +159,7 @@ Page({
    * @param {number} rates 月利率
    * @param {number} months 月期数
    * @param {number} type 还款方式
+   * @returns {object} { totalLoan, monthlyRepayment, totalInterest, totalRepayment}
    */
   calcLoan({ money, rates, months, type }) {
     console.log({ money, rates, months, type });
@@ -149,11 +191,6 @@ Page({
     }
 
     console.log(result);
-    this.setData({
-      'detail.monthlyRepayment': result.monthlyRepayment.toFixed(2),
-      'detail.totalRepayment': (result.totalRepayment / 10000).toFixed(2),
-      'detail.totalLoan': result.totalLoan.toFixed(2),
-      'detail.totalInterest': (result.totalInterest / 10000).toFixed(2),
-    });
+    return result;
   },
 });

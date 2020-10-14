@@ -71,11 +71,11 @@
   <form class="form margin-top" wx:if="{{activeTabType === 3}}">
     <view class="cu-form-group">
       <view class="title">商业贷款（万元）</view>
-      <input type="number" placeholder="请输入贷款金额" bindinput="onCombinedFundLoanMoneyChange"></input>
+      <input type="number" placeholder="请输入贷款金额" bindinput="onCombinedCommercialLoanMoneyChange"></input>
     </view>
     <view class="cu-form-group">
       <view class="title">公积金贷款（万元）</view>
-      <input type="number" placeholder="请输入贷款金额" bindinput="onCombinedCommercialLoanMoneyChange"></input>
+      <input type="number" placeholder="请输入贷款金额" bindinput="onCombinedFundLoanMoneyChange"></input>
     </view>
     <view class="cu-form-group margin-top">
       <view class="title">商贷利率</view>

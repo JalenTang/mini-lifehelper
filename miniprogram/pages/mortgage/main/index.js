@@ -61,8 +61,8 @@ Page({
     combinedLoanFundMoney: 0,
     combinedLoanFundRatesIndex: 0,
     combinedLoanCommercialMoney: 0,
-    combinedLoanCommercialRatesIndex: 6,
-    combinedLoanYearIndex: 11,
+    combinedLoanCommercialRatesIndex: 3,
+    combinedLoanYearIndex: 0,
     combinedLoanRepaymentMethodsIndex: 0,
   },
 
@@ -199,9 +199,9 @@ Page({
       fundMoney: this.data.combinedLoanFundMoney * 10000,
       fundRates: this.data.fundLoanRatesRange[this.data.combinedLoanFundRatesIndex].rates / 12,
       commercialMoney: this.data.combinedLoanCommercialMoney * 10000,
-      commercialRates: this.data.commercialLoanRatesRange[this.data.combinedLoanFundRatesIndex].rates / 12,
-      months: parseInt(this.data.loanYearsRange[this.data.commercialLoanYearIndex]) * 12,
-      type: this.data.repaymentMethodsRange[this.data.commercialLoanRepaymentMethodIndex].type,
+      commercialRates: this.data.commercialLoanRatesRange[this.data.combinedLoanCommercialRatesIndex].rates / 12,
+      months: parseInt(this.data.loanYearsRange[this.data.combinedLoanYearIndex]) * 12,
+      type: this.data.repaymentMethodsRange[this.data.combinedLoanRepaymentMethodsIndex].type,
     };
 
     console.log(data);
