@@ -1,21 +1,22 @@
 {
   "pages": [
+    "pages/tools/index",
+    "pages/home/index",
+    "pages/eat/index",
     "pages/mortgage/main/index",
     "pages/mortgage/detail/index",
     "pages/mortgage/list/index",
-    "pages/tools/index",
-    "pages/home/index",
     "pages/index/index",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
     "pages/addFunction/addFunction",
     "pages/deployFunctions/deployFunctions",
     "pages/chooseLib/chooseLib",
-    "pages/openapi/openapi",
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",
-    "pages/openapi/cloudid/cloudid"
+    "pages/openapi/cloudid/cloudid",
+    "pages/databaseGuide/databaseGuide",
+    "pages/openapi/openapi",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole"
   ],
   "tabBar": {
     "color": "#8a8a8a",

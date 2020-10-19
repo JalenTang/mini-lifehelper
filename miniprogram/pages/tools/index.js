@@ -9,27 +9,19 @@ Page({
       {
         id: 0,
         type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
+        image: '/images/jtcsm.png',
+        url: '/pages/eat/index'
       },
       {
         id: 1,
         type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
+        image: '/images/fdsss.jpg',
+        url: '/pages/mortgage/main/index'
       },
-      {
-        id: 2,
-        type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
-      },
-      {
-        id: 3,
-        type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
-      }
-    ],
+    ], 
     iconList: [
-      { icon: 'eat', color: 'orange', name: '中午吃什么' },
-      { icon: 'mortgage', color: 'orange', name: '房贷算算算' },
+      { icon: 'eat', color: 'orange', name: '今天吃什么', url: '/pages/eat/index'  },
+      { icon: 'mortgage', color: 'orange', name: '房贷算算算', url: '/pages/mortgage/main/index' },
       { icon: 'questionfill', color: 'orange', name: '待定' },
       { icon: 'questionfill', color: 'orange', name: '待定' },
       { icon: 'questionfill', color: 'orange', name: '待定' },
@@ -45,11 +37,19 @@ Page({
     console.log(e);
   },
 
-  onToolsItemClick: function (e) {
+  onItemClick: function (e) {
     const { item } = e.currentTarget.dataset
     console.log(item);
+    if (!item.url) {
+      wx.showToast({
+        mask: 'true',
+        icon: 'none',
+        title: '敬请期待'
+      })
+      return false
+    }
     wx.navigateTo({
-      url: '/pages/mortgage/index',
+      url: item.url,
       success: function() {},
       fail: function() {
         console.log('fail');

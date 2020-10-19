@@ -1,7 +1,7 @@
 <view class="container">
   <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-    <swiper-item wx:for="{{swiperList}}" wx:key="index">
-      <image src="{{item.url}}" mode="aspectFill"></image>
+    <swiper-item wx:for="{{swiperList}}" wx:key="index" data-item="{{item}}" bindtap="onItemClick">
+      <image src="{{item.image}}" mode="aspectFill"></image>
     </swiper-item>
   </swiper>
   <!-- 工具列表 -->
@@ -18,7 +18,7 @@
       </view>
     </view>
     <view class="cu-list grid col-{{gridCol}}">
-      <view class="cu-item" wx:for="{{iconList}}" wx:key="index" data-item="{{item}}" bindtap="onToolsItemClick">
+      <view class="cu-item" wx:for="{{iconList}}" wx:key="index" data-item="{{item}}" bindtap="onItemClick">
         <view class="cuIcon-{{item.icon}} text-{{item.color}}">
           <!-- badge -->
           <!-- <view class="cu-tag badge" wx:if="{{item.badge!=0}}">

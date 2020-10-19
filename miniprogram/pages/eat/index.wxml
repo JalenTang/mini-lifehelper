@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="select-area">
+    <view class="eat-content">今天吃{{text}}？</view>
+    <button wx:if="{{!isStart && isFirstTime}}" class="cu-btn round bg-orange margin-top" bindtap="onRandomSelectStart">
+      开始
+    </button>
+    <button wx:elif="{{isStart}}" class="cu-btn round bg-orange margin-top" bindtap="onRandomSelectEnd">
+      停止
+    </button>
+    <button wx:else class="cu-btn round bg-orange margin-top" bindtap="onRandomSelectStart">
+      不行，换一个
+    </button>
+  </view>
+  <view class="bg-area">
+    <!-- <text wx:for="{{}}"> -->
+  </view>
+</view>
