@@ -11,11 +11,11 @@
         <text class="cuIcon-title text-orange "></text>
         工具列表
       </view>
-      <view class="action">
+      <!-- <view class="action">
         <button class="cu-btn bg-green shadow" bindtap="showMore" data-target="gridModal">
           更多
         </button>
-      </view>
+      </view> -->
     </view>
     <view class="cu-list grid col-{{gridCol}}">
       <view class="cu-item" wx:for="{{iconList}}" wx:key="index" data-item="{{item}}" bindtap="onItemClick">

@@ -5,18 +5,7 @@
     "pages/eat/index",
     "pages/mortgage/main/index",
     "pages/mortgage/detail/index",
-    "pages/mortgage/list/index",
-    "pages/index/index",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib",
-    "pages/openapi/serverapi/serverapi",
-    "pages/openapi/callback/callback",
-    "pages/openapi/cloudid/cloudid",
-    "pages/databaseGuide/databaseGuide",
-    "pages/openapi/openapi",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole"
+    "pages/mortgage/list/index"
   ],
   "tabBar": {
     "color": "#8a8a8a",
@@ -25,14 +14,14 @@
       {
         "pagePath": "pages/tools/index",
         "text": "工具",
-        "iconPath": "./images/tools.png",
-        "selectedIconPath": "./images/tools.selected.png"
+        "iconPath": "images/tools.png",
+        "selectedIconPath": "images/tools.selected.png"
       },
       {
         "pagePath": "pages/home/index",
         "text": "我的",
-        "iconPath": "./images/home.png",
-        "selectedIconPath": "./images/home.selected.png"
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home.selected.png"
       }
     ]
   },

@@ -1,2 +1,51 @@
-<!--miniprogram/pages/home/index.wxml-->
-<text>miniprogram/pages/home/index.wxml</text>
+<view class="container">
+  <view class="userinfo">
+    <button class="userinfo-btn" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+      <!-- 获取头像昵称 -->
+      <image class="userinfo-avatar" src="/images/user.png" mode="cover"></image>
+      <text class="userinfo-nickname">点击获取头像昵称</text>
+    </button>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="main cu-list menu card-menu shadow-lg">
+    <view class="cu-item arrow">
+      <view class="content" bindtap="onQrcodeShow">
+        <text class="cuIcon-appreciatefill text-red"></text>
+        <text class="text-grey">赞赏支持</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content" data-show="{{true}}" bindtap="onAboutModalChange">
+        <text class="cuIcon-infofill text-cyan"></text>
+        <text class="text-grey">关于</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{aboutModal?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">关于小程序</view>
+      <view class="action" data-show="{{false}}" bindtap="onAboutModalChange">
+        <text class="cuIcon-close text-orange"></text>
+      </view>
+    </view>
+    <view class="padding-xl" style="text-align:left;">
+      本小程序包括了
+      <text class="text-orange">今天吃什么</text>
+      、
+      <text class="text-orange">房贷算算算</text>
+      等一系列简单实用的功能，希望能帮助到各位小伙伴。
+      
+      <view class="modal-contact">
+        <text class="margin-top">更多建议请联系</text>
+        <text class="text-orange margin-top">jalen2017@hotmail.com</text>
+        <text class="margin-top">关注我的公众号</text>
+        <text class="text-orange margin-top">CoderAndMore</text>
+      </view>
+    </view>
+  </view>
+</view>

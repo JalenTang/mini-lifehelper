@@ -1,1 +1,54 @@
-/* miniprogram/pages/home/index.wxss */
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: #f6f6f6;
+}
+
+.userinfo {
+  width: 100%;
+  height: 330rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f37d5f;
+}
+
+.userinfo-btn {
+  width: 100%;
+  height: 330rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cuIcon-people {
+  font-size: 20rpx;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  margin-top: 16rpx;
+  color: #fff;
+}
+
+.main {
+  width: 100%;
+  margin: 50rpx auto;
+  background-color: #fff;
+  border-radius: 20rpx;
+}
+
+.modal-contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
